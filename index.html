@@ -1,57 +1,318 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>brbrs Gold AI</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-:root{--gold:#ffd66b;--gold2:#b8860b;--gold3:#fff0b5;--text:#fff9e9;--muted:#b8ad91}
-*{box-sizing:border-box}html,body{height:100%}
-body{margin:0;font-family:Inter,Arial,sans-serif;color:var(--text);background:radial-gradient(circle at 15% 10%,rgba(255,214,107,.18),transparent 28%),radial-gradient(circle at 85% 18%,rgba(184,134,11,.17),transparent 30%),linear-gradient(135deg,#020202,#0b0904 45%,#000);overflow:hidden}
-body:before{content:"";position:fixed;inset:0;opacity:.32;pointer-events:none;background-image:linear-gradient(rgba(255,214,107,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(255,214,107,.06) 1px,transparent 1px);background-size:44px 44px;animation:gridMove 14s linear infinite}@keyframes gridMove{to{transform:translate(44px,44px)}}.hidden{display:none!important}
-.login{position:fixed;inset:0;z-index:20;display:grid;place-items:center;padding:22px;background:rgba(0,0,0,.58);backdrop-filter:blur(14px)}
-.loginBox{width:min(440px,100%);border:1px solid rgba(255,214,107,.35);border-radius:28px;padding:28px;background:linear-gradient(180deg,rgba(24,19,9,.94),rgba(3,3,3,.94));box-shadow:0 0 60px rgba(255,214,107,.18),inset 0 0 30px rgba(255,214,107,.05)}
-.loginLogo,.logo{display:grid;place-items:center;font-weight:900;color:#0a0700;background:linear-gradient(135deg,#fff4b8,#ffd66b,#b8860b);box-shadow:0 0 34px rgba(255,214,107,.5)}
-.loginLogo{width:72px;height:72px;border-radius:24px;margin-bottom:16px;font-size:32px}.logo{width:48px;height:48px;border-radius:17px}
-.loginBox h1{margin:0 0 8px;font-size:30px;color:var(--gold3)}.loginBox p,.small{color:var(--muted);line-height:1.45}.small{font-size:12px}.nameInput{width:100%;border:1px solid rgba(255,214,107,.35);outline:0;border-radius:18px;padding:15px 16px;background:rgba(0,0,0,.45);color:var(--text);font:inherit}
-.app{height:100vh;display:grid;grid-template-columns:310px 1fr;position:relative;z-index:1}.sidebar{background:rgba(0,0,0,.34);backdrop-filter:blur(18px);border-right:1px solid rgba(255,214,107,.22);padding:18px;display:flex;flex-direction:column;gap:14px;min-width:0}.brand{display:flex;align-items:center;gap:12px}.brand h1{font-size:22px;margin:0;color:var(--gold3);text-shadow:0 0 16px rgba(255,214,107,.38)}.brand p{margin:2px 0 0}
-.sideCard{background:rgba(18,14,7,.78);border:1px solid rgba(255,214,107,.15);border-radius:22px;padding:14px;box-shadow:0 0 28px rgba(0,0,0,.3)}.sideTitle{font-weight:900;margin-bottom:8px;color:var(--gold3)}
-.btn{border:0;border-radius:16px;padding:12px 14px;font-weight:900;cursor:pointer;color:#120c00;background:linear-gradient(135deg,#fff4b8,#ffd66b,#b8860b);box-shadow:0 0 18px rgba(255,214,107,.24);transition:.18s transform,.18s box-shadow,.18s filter}.btn:hover{transform:translateY(-1px) scale(1.025);box-shadow:0 0 30px rgba(255,214,107,.48);filter:saturate(1.15)}.btn:active{transform:translateY(1px) scale(.98)}.btn.ghost{background:rgba(255,214,107,.08);color:var(--gold3);border:1px solid rgba(255,214,107,.17);box-shadow:none}.btn.danger{background:linear-gradient(135deg,#ff7777,#b30000);color:white}
-.chatList{display:flex;flex-direction:column;gap:8px;overflow:auto;padding-right:4px}.chatItem{width:100%;text-align:left;border:1px solid rgba(255,214,107,.12);border-radius:15px;padding:11px;background:rgba(255,214,107,.055);color:var(--text);cursor:pointer}.chatItem:hover,.chatItem.active{border-color:rgba(255,214,107,.42);background:rgba(255,214,107,.12)}.chatTitle{font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.chatDate{font-size:11px;color:var(--muted);margin-top:4px}
-.main{display:flex;flex-direction:column;min-width:0}.topbar{min-height:74px;display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:rgba(0,0,0,.25);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,214,107,.12)}.status{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:13px}.dot{width:10px;height:10px;background:var(--gold);border-radius:50%;box-shadow:0 0 14px var(--gold)}
-#chat{flex:1;overflow-y:auto;padding:22px;display:flex;flex-direction:column;gap:16px;scroll-behavior:smooth}#chat::-webkit-scrollbar,.chatList::-webkit-scrollbar{width:9px}#chat::-webkit-scrollbar-thumb,.chatList::-webkit-scrollbar-thumb{background:rgba(255,214,107,.25);border-radius:99px}
-.row{display:flex;gap:10px;align-items:flex-end;animation:pop .18s ease-out}.row.userRow{justify-content:flex-end}@keyframes pop{from{opacity:0;transform:translateY(8px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}.avatar{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-weight:900;flex:0 0 auto}.aiAvatar{background:#111;color:var(--gold);border:1px solid rgba(255,214,107,.35);box-shadow:0 0 18px rgba(255,214,107,.22)}.userAvatar{background:linear-gradient(135deg,#fff4b8,#ffd66b,#9c6b00);color:#120c00;box-shadow:0 0 18px rgba(255,214,107,.36)}
-.msg{max-width:min(760px,76%);padding:14px 16px;border-radius:22px;line-height:1.55;white-space:pre-wrap;word-wrap:break-word;font-size:15px}.user{background:linear-gradient(135deg,#fff4b8,#ffd66b,#b8860b);color:#140d00;border-bottom-right-radius:7px;box-shadow:0 0 22px rgba(255,214,107,.28)}.ai{background:rgba(255,255,255,.06);border:1px solid rgba(255,214,107,.12);border-bottom-left-radius:7px;box-shadow:0 0 22px rgba(255,214,107,.12)}.meta{font-size:11px;opacity:.62;margin-top:7px}
-.composer{padding:14px 18px;background:rgba(0,0,0,.38);backdrop-filter:blur(18px);border-top:1px solid rgba(255,214,107,.15);display:flex;gap:10px;align-items:flex-end}.inputWrap{flex:1;background:rgba(8,7,5,.94);border:1px solid rgba(255,214,107,.25);box-shadow:0 0 20px rgba(255,214,107,.08),inset 0 0 18px rgba(255,214,107,.03);border-radius:20px;padding:8px 12px;display:flex}textarea{flex:1;resize:none;border:0;outline:0;background:transparent;color:white;font:inherit;height:44px;max-height:130px;padding:10px 0}.send{height:48px;min-width:94px}.typing{display:inline-flex;gap:4px}.typing span{width:7px;height:7px;border-radius:50%;background:var(--gold);display:inline-block;animation:bounce 1s infinite}.typing span:nth-child(2){animation-delay:.15s}.typing span:nth-child(3){animation-delay:.3s}@keyframes bounce{0%,80%,100%{transform:translateY(0);opacity:.45}40%{transform:translateY(-7px);opacity:1}}.code{font-family:Consolas,monospace;background:#050505;border:1px solid rgba(255,214,107,.2);padding:10px;border-radius:12px;display:block;overflow:auto;color:#fff0b5}
-@media(max-width:850px){body{overflow:auto}.app{grid-template-columns:1fr;height:100dvh}.sidebar{display:none}.msg{max-width:86%}.send{min-width:74px}.topbar .small{display:none}}
-</style></head><body>
-<div id="login" class="login"><div class="loginBox"><div class="loginLogo">B</div><h1>brbrs Gold AI</h1><p>Adını yaz, sistem seni kendi hesabına atsın. Sohbetlerin ilk mesajın adıyla kaydolur.</p><input id="nameInput" class="nameInput" placeholder="Adını yaz..." maxlength="24" /><br><br><button class="btn" style="width:100%" onclick="login()">Giriş Yap</button></div></div>
-<div class="app"><aside class="sidebar"><div class="brand"><div class="logo">B</div><div><h1>brbrs Gold</h1><p>Klas siyah-altın AI</p></div></div><div class="sideCard"><div class="sideTitle">Hesap</div><div class="small" id="accountName">Giriş bekleniyor...</div></div><button class="btn" onclick="newChat()">Yeni Sohbet</button><button class="btn ghost" onclick="logout()">Hesaptan Çık</button><button class="btn danger" onclick="deleteCurrentChat()">Bu Sohbeti Sil</button><div class="sideCard" style="min-height:0;display:flex;flex-direction:column"><div class="sideTitle">Sohbetler</div><div id="chatList" class="chatList"></div></div></aside><main class="main"><div class="topbar"><div><b id="topTitle">Yeni Sohbet</b><div class="small">İlk mesaj otomatik sohbet adı olur</div></div><div class="status"><span class="dot"></span><span id="statusText">Hazır</span></div></div><div id="chat"></div><div class="composer"><div class="inputWrap"><textarea id="input" placeholder="Mesaj yaz... Enter gönderir, Shift+Enter alt satır"></textarea></div><button class="btn send" onclick="sendMessage()">Gönder</button></div></main></div>
-<script>
-const loginEl=document.getElementById("login"),nameInput=document.getElementById("nameInput"),accountName=document.getElementById("accountName"),chatList=document.getElementById("chatList"),chat=document.getElementById("chat"),input=document.getElementById("input"),statusText=document.getElementById("statusText"),topTitle=document.getElementById("topTitle");let username=localStorage.getItem("gold_username")||"",currentChatId=localStorage.getItem("gold_current_chat")||"",isSending=false;
-function cleanName(n){return String(n||"").trim().replace(/[^\\p{L}\\p{N}_ -]/gu,"").slice(0,24)||"Misafir"}function userKey(){return"gold_user_"+username.toLowerCase().replace(/\\s+/g,"_")}function chatsKey(){return userKey()+"_chats"}function getChats(){return JSON.parse(localStorage.getItem(chatsKey())||"[]")}function setChats(c){localStorage.setItem(chatsKey(),JSON.stringify(c))}function getCurrentChat(){return getChats().find(c=>c.id===currentChatId)}function now(){return new Date().toLocaleTimeString("tr-TR",{hour:"2-digit",minute:"2-digit"})}function dateText(t){return new Date(t).toLocaleString("tr-TR",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"})}function scrollToBottom(s=true){chat.scrollTo({top:chat.scrollHeight,behavior:s?"smooth":"auto"})}function escapeHtml(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\\"":"&quot;"}[c]))}function format(t){let s=escapeHtml(t);s=s.replace(/```([\\s\\S]*?)```/g,(_,c)=>`<span class="code">${c}</span>`);s=s.replace(/`([^`]+)`/g,"<b>$1</b>");return s}function firstTitle(t){return String(t||"Yeni Sohbet").trim().split(/\\s+/).slice(0,8).join(" ").slice(0,50)||"Yeni Sohbet"}
-function saveCurrentChat(c){let chats=getChats();const i=chats.findIndex(x=>x.id===c.id);if(i>=0)chats[i]=c;else chats.unshift(c);chats.sort((a,b)=>(b.updatedAt||0)-(a.updatedAt||0));setChats(chats);renderChatList()}function ensureChat(first=""){let c=getCurrentChat();if(c)return c;c={id:crypto.randomUUID(),title:first?firstTitle(first):"Yeni Sohbet",messages:[],createdAt:Date.now(),updatedAt:Date.now()};currentChatId=c.id;localStorage.setItem("gold_current_chat",currentChatId);saveCurrentChat(c);return c}
-function addMessage(text,type,loading=false){const row=document.createElement("div");row.className="row "+(type==="user"?"userRow":"aiRow");const avatar=document.createElement("div");avatar.className="avatar "+(type==="user"?"userAvatar":"aiAvatar");avatar.textContent=type==="user"?(username[0]?.toUpperCase()||"U"):"AI";const bubble=document.createElement("div");bubble.className="msg "+type;bubble.innerHTML=loading?`<b>brbrs Gold düşünüyor</b><br><span class="typing"><span></span><span></span><span></span></span>`:`${format(text)}<div class="meta">${now()}</div>`;if(type==="user"){row.appendChild(bubble);row.appendChild(avatar)}else{row.appendChild(avatar);row.appendChild(bubble)}chat.appendChild(row);scrollToBottom(true);return bubble}
-function renderMessages(){chat.innerHTML="";const c=getCurrentChat();if(!c){topTitle.textContent="Yeni Sohbet";return}topTitle.textContent=c.title||"Yeni Sohbet";for(const m of c.messages||[])addMessage(m.content,m.role==="assistant"?"ai":"user");scrollToBottom(false)}function renderChatList(){const chats=getChats();chatList.innerHTML="";if(!chats.length){chatList.innerHTML=`<div class="small">Daha sohbet yok.</div>`;return}for(const c of chats){const btn=document.createElement("button");btn.className="chatItem "+(c.id===currentChatId?"active":"");btn.innerHTML=`<div class="chatTitle">${escapeHtml(c.title||"Yeni Sohbet")}</div><div class="chatDate">${dateText(c.updatedAt||Date.now())}</div>`;btn.onclick=()=>{currentChatId=c.id;localStorage.setItem("gold_current_chat",currentChatId);renderChatList();renderMessages()};chatList.appendChild(btn)}}
-window.login = function () {
-  let val = nameInput.value.trim();
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,Arial;background:radial-gradient(circle at top,#3b2b08,#050505 45%,#000);color:#fff;height:100vh;overflow:hidden}
+button{cursor:pointer;border:0;font-weight:900}
+.login{position:fixed;inset:0;display:grid;place-items:center;background:rgba(0,0,0,.75);z-index:5}
+.box{width:min(420px,92%);padding:28px;border-radius:28px;background:rgba(20,15,5,.95);border:1px solid #ffd76a;box-shadow:0 0 60px #ffd76a33}
+.logo{width:70px;height:70px;border-radius:22px;background:linear-gradient(135deg,#fff2b0,#ffd76a,#9d6b00);display:grid;place-items:center;color:#080500;font-size:34px;font-weight:900;box-shadow:0 0 35px #ffd76a88}
+h1{margin:16px 0 6px;color:#fff2b0}
+p{color:#c9bb98}
+input,textarea{width:100%;border:1px solid #ffd76a55;background:#070707;color:white;border-radius:16px;padding:14px;font:inherit;outline:none}
+.gold{margin-top:12px;width:100%;padding:14px;border-radius:16px;background:linear-gradient(135deg,#fff2b0,#ffd76a,#a87300);color:#090600;box-shadow:0 0 25px #ffd76a44}
+.gold:hover{transform:scale(1.02)}
+.app{height:100vh;display:grid;grid-template-columns:300px 1fr}
+.side{padding:18px;background:rgba(0,0,0,.42);border-right:1px solid #ffd76a33;backdrop-filter:blur(16px);display:flex;flex-direction:column;gap:12px}
+.brand{display:flex;gap:12px;align-items:center}
+.brand .logo{width:48px;height:48px;font-size:23px;border-radius:16px}
+.card{padding:14px;border-radius:20px;background:rgba(255,215,106,.07);border:1px solid #ffd76a22}
+.btn{padding:12px;border-radius:15px;background:#ffd76a;color:#090600}
+.ghost{background:#ffffff12;color:white;border:1px solid #ffffff22}
+.danger{background:#7d1111;color:white}
+.list{overflow:auto;display:flex;flex-direction:column;gap:8px}
+.item{padding:12px;text-align:left;border-radius:14px;background:#ffffff10;color:white;border:1px solid #ffd76a22}
+.item.active{background:#ffd76a22;border-color:#ffd76a}
+.main{display:flex;flex-direction:column}
+.top{height:72px;padding:16px 20px;background:#00000044;border-bottom:1px solid #ffd76a22;display:flex;align-items:center;justify-content:space-between}
+.chat{flex:1;overflow:auto;padding:22px;display:flex;flex-direction:column;gap:14px}
+.row{display:flex}.row.user{justify-content:flex-end}
+.msg{max-width:75%;padding:14px 16px;border-radius:20px;white-space:pre-wrap;line-height:1.5}
+.user .msg{background:linear-gradient(135deg,#fff2b0,#ffd76a,#b88412);color:#090600;border-bottom-right-radius:6px}
+.ai .msg{background:#ffffff12;border:1px solid #ffd76a22;border-bottom-left-radius:6px}
+.composer{display:flex;gap:10px;padding:14px;background:#00000066;border-top:1px solid #ffd76a22}
+.composer textarea{height:52px;resize:none}
+.send{width:95px;border-radius:16px;background:linear-gradient(135deg,#fff2b0,#ffd76a,#9d6b00)}
+@media(max-width:800px){.app{grid-template-columns:1fr}.side{display:none}.msg{max-width:88%}}
+</style>
+</head>
+<body>
 
-  if (!val) {
-    alert("Bir isim gir kanka");
+<div id="login" class="login">
+  <div class="box">
+    <div class="logo">B</div>
+    <h1>brbrs Gold AI</h1>
+    <p>Adını yaz. Her ad kendi sohbetlerini ayrı tutar.</p>
+    <input id="nameInput" placeholder="Adını yaz">
+    <button class="gold" onclick="login()">Giriş Yap</button>
+  </div>
+</div>
+
+<div class="app">
+  <aside class="side">
+    <div class="brand">
+      <div class="logo">B</div>
+      <div>
+        <b>brbrs Gold</b>
+        <div style="color:#b8ad91;font-size:12px">Premium AI Chat</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div style="color:#b8ad91;font-size:12px">Hesap</div>
+      <b id="account">-</b>
+    </div>
+
+    <button class="btn" onclick="newChat()">Yeni Sohbet</button>
+    <button class="btn ghost" onclick="logout()">Çıkış</button>
+    <button class="btn danger" onclick="deleteChat()">Bu Sohbeti Sil</button>
+
+    <div class="card" style="flex:1;min-height:0">
+      <b>Sohbetler</b>
+      <div id="chatList" class="list" style="margin-top:10px"></div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="top">
+      <div>
+        <b id="title">Yeni Sohbet</b>
+        <div style="color:#b8ad91;font-size:12px">İlk mesaj sohbet adı olur</div>
+      </div>
+      <div id="status" style="color:#ffd76a">Hazır</div>
+    </div>
+
+    <div id="chat" class="chat"></div>
+
+    <div class="composer">
+      <textarea id="input" placeholder="Mesaj yaz..."></textarea>
+      <button class="send" onclick="sendMessage()">Gönder</button>
+    </div>
+  </main>
+</div>
+
+<script>
+let user = localStorage.getItem("gold_user") || "";
+let currentId = localStorage.getItem("gold_current") || "";
+
+const loginBox = document.getElementById("login");
+const nameInput = document.getElementById("nameInput");
+const account = document.getElementById("account");
+const chat = document.getElementById("chat");
+const input = document.getElementById("input");
+const list = document.getElementById("chatList");
+const title = document.getElementById("title");
+const statusText = document.getElementById("status");
+
+function key(){
+  return "gold_chats_" + user.toLowerCase().replaceAll(" ","_");
+}
+
+function getChats(){
+  return JSON.parse(localStorage.getItem(key()) || "[]");
+}
+
+function setChats(chats){
+  localStorage.setItem(key(), JSON.stringify(chats));
+}
+
+function makeTitle(text){
+  return text.split(" ").slice(0,6).join(" ").slice(0,45) || "Yeni Sohbet";
+}
+
+function getCurrent(){
+  return getChats().find(c => c.id === currentId);
+}
+
+function saveChat(c){
+  let chats = getChats();
+  const i = chats.findIndex(x => x.id === c.id);
+  if(i >= 0) chats[i] = c;
+  else chats.unshift(c);
+  chats.sort((a,b) => b.updated - a.updated);
+  setChats(chats);
+  renderList();
+}
+
+function login(){
+  const val = nameInput.value.trim();
+  if(!val){ alert("Ad yaz kanka"); return; }
+
+  user = val;
+  localStorage.setItem("gold_user", user);
+  account.textContent = user;
+  loginBox.style.display = "none";
+
+  const chats = getChats();
+  if(chats.length && !getCurrent()){
+    currentId = chats[0].id;
+    localStorage.setItem("gold_current", currentId);
+  }
+
+  renderList();
+  renderChat();
+}
+
+function logout(){
+  localStorage.removeItem("gold_user");
+  localStorage.removeItem("gold_current");
+  location.reload();
+}
+
+function newChat(){
+  currentId = "";
+  localStorage.removeItem("gold_current");
+  chat.innerHTML = "";
+  title.textContent = "Yeni Sohbet";
+  renderList();
+}
+
+function deleteChat(){
+  if(!currentId) return;
+  const chats = getChats().filter(c => c.id !== currentId);
+  setChats(chats);
+  currentId = chats[0]?.id || "";
+  localStorage.setItem("gold_current", currentId);
+  renderList();
+  renderChat();
+}
+
+function ensureChat(first){
+  let c = getCurrent();
+  if(c) return c;
+
+  c = {
+    id: crypto.randomUUID(),
+    title: makeTitle(first),
+    messages: [],
+    updated: Date.now()
+  };
+
+  currentId = c.id;
+  localStorage.setItem("gold_current", currentId);
+  saveChat(c);
+  return c;
+}
+
+function renderList(){
+  const chats = getChats();
+  list.innerHTML = "";
+
+  if(!chats.length){
+    list.innerHTML = "<div style='color:#b8ad91;font-size:13px'>Sohbet yok</div>";
     return;
   }
 
-  username = val;
+  chats.forEach(c => {
+    const b = document.createElement("button");
+    b.className = "item" + (c.id === currentId ? " active" : "");
+    b.innerHTML = "<b>" + c.title + "</b><br><small>" + new Date(c.updated).toLocaleString("tr-TR") + "</small>";
+    b.onclick = () => {
+      currentId = c.id;
+      localStorage.setItem("gold_current", currentId);
+      renderList();
+      renderChat();
+    };
+    list.appendChild(b);
+  });
+}
 
-  localStorage.setItem("gold_username", username);
+function addMsg(role,text){
+  const row = document.createElement("div");
+  row.className = "row " + (role === "user" ? "user" : "ai");
 
-  loginEl.classList.add("hidden");
+  const bubble = document.createElement("div");
+  bubble.className = "msg";
+  bubble.textContent = text;
 
-  accountName.textContent = username;
+  row.appendChild(bubble);
+  chat.appendChild(row);
+  chat.scrollTop = chat.scrollHeight;
+  return bubble;
+}
 
-  renderChatList();
-  renderMessages();
-};username=cleanName(nameInput.value);localStorage.setItem("gold_username",username);loginEl.classList.add("hidden");accountName.textContent=username;const chats=getChats();if(chats.length&&!chats.find(c=>c.id===currentChatId)){currentChatId=chats[0].id;localStorage.setItem("gold_current_chat",currentChatId)}renderChatList();renderMessages()};window.logout=function(){localStorage.removeItem("gold_username");username="";currentChatId="";localStorage.removeItem("gold_current_chat");chat.innerHTML="";loginEl.classList.remove("hidden")};window.newChat=function(){currentChatId="";localStorage.removeItem("gold_current_chat");chat.innerHTML="";topTitle.textContent="Yeni Sohbet";renderChatList();input.focus()};window.deleteCurrentChat=function(){if(!currentChatId)return;const chats=getChats().filter(c=>c.id!==currentChatId);setChats(chats);currentChatId=chats[0]?.id||"";localStorage.setItem("gold_current_chat",currentChatId);renderChatList();renderMessages()};
-window.sendMessage=async function(){if(isSending)return;if(!username){loginEl.classList.remove("hidden");return}const text=input.value.trim();if(!text)return;const c=ensureChat(text);if(!c.messages.length){c.title=firstTitle(text);topTitle.textContent=c.title}input.value="";input.style.height="44px";addMessage(text,"user");c.messages.push({role:"user",content:text,time:Date.now()});c.updatedAt=Date.now();saveCurrentChat(c);const loading=addMessage("","ai",true);statusText.textContent="Düşünüyor...";isSending=true;try{const history=c.messages.slice(-12).map(m=>({role:m.role,content:m.content}));const res=await fetch("/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:text,history})});const data=await res.json();const reply=data.reply||"Cevap yok kanka.";loading.innerHTML=`${format(reply)}<div class="meta">${now()}</div>`;const fresh=getCurrentChat();fresh.messages.push({role:"assistant",content:reply,time:Date.now()});fresh.updatedAt=Date.now();saveCurrentChat(fresh)}catch(e){loading.innerHTML=`Sunucuya bağlanamadım kanka. Render loglarını kontrol et.<div class="meta">${now()}</div>`}finally{isSending=false;statusText.textContent="Hazır";scrollToBottom(true)}};input.addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();window.sendMessage()}});input.addEventListener("input",()=>{input.style.height="44px";input.style.height=Math.min(input.scrollHeight,130)+"px"});nameInput.addEventListener("keydown",e=>{if(e.key==="Enter")window.login()});if(username){loginEl.classList.add("hidden");accountName.textContent=username;renderChatList();renderMessages()}else{setTimeout(()=>nameInput.focus(),100)}
-</script></body></html>
+function renderChat(){
+  chat.innerHTML = "";
+  const c = getCurrent();
+
+  if(!c){
+    title.textContent = "Yeni Sohbet";
+    return;
+  }
+
+  title.textContent = c.title;
+  c.messages.forEach(m => addMsg(m.role,m.text));
+}
+
+async function sendMessage(){
+  const text = input.value.trim();
+  if(!text) return;
+
+  input.value = "";
+
+  const c = ensureChat(text);
+  if(c.messages.length === 0){
+    c.title = makeTitle(text);
+    title.textContent = c.title;
+  }
+
+  c.messages.push({role:"user",text});
+  c.updated = Date.now();
+  saveChat(c);
+  addMsg("user",text);
+
+  statusText.textContent = "Düşünüyor...";
+  const loading = addMsg("assistant","...");
+
+  try{
+    const history = c.messages.slice(-12).map(m => ({
+      role: m.role === "assistant" ? "assistant" : "user",
+      content: m.text
+    }));
+
+    const res = await fetch("/chat",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({message:text,history})
+    });
+
+    const data = await res.json();
+    const reply = data.reply || "Cevap yok kanka.";
+
+    loading.textContent = reply;
+    c.messages.push({role:"assistant",text:reply});
+    c.updated = Date.now();
+    saveChat(c);
+  }catch(e){
+    loading.textContent = "Sunucuya bağlanamadım kanka. Render loglarına bak.";
+  }
+
+  statusText.textContent = "Hazır";
+}
+
+input.addEventListener("keydown", e => {
+  if(e.key === "Enter" && !e.shiftKey){
+    e.preventDefault();
+    sendMessage();
+  }
+});
+
+nameInput.addEventListener("keydown", e => {
+  if(e.key === "Enter") login();
+});
+
+if(user){
+  account.textContent = user;
+  loginBox.style.display = "none";
+  renderList();
+  renderChat();
+}
+</script>
+
+</body>
+</html>
